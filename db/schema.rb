@@ -25,11 +25,12 @@ ActiveRecord::Schema.define(version: 2020_04_28_220306) do
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.integer "list_id"
-    t.integer "parent_id", default: -1
+    t.integer "parent_id"
     t.boolean "is_complete"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["list_id"], name: "index_tasks_on_list_id"
+    t.index ["parent_id"], name: "index_tasks_on_parent_id"
   end
 
   create_table "users", force: :cascade do |t|

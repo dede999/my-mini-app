@@ -4,6 +4,6 @@ class List < ApplicationRecord
   accepts_nested_attributes_for :tasks
 
   def first_level_children
-    self.tasks.where(parent_id: -1)
+    self.tasks.where(parent_id: nil)
   end
 end
