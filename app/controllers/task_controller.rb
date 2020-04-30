@@ -8,7 +8,10 @@ class TaskController < ApplicationController
   end
 
   def show
-    render json: @task
+    render json: {
+        task: @task,
+        child: @task.child_tasks
+    }
   end
 
   def create
@@ -29,6 +32,8 @@ class TaskController < ApplicationController
   def update
     if @task.list.user === current_user
       if @task.update(task_params)
+        @task.manage_children
+        @task.manage_parent
         render json: @task, status: :ok
       else
         render json: @task.errors, status: :unprocessable_entity
