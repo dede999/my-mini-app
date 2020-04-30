@@ -33,4 +33,18 @@ RSpec.describe Like, type: :model do
       ).to have_key :user
     end
   end
+
+  context "Every instance has" do
+    before(:all) do
+      @like = Like.new
+    end
+
+    it "a :user method" do
+      expect(@like).to respond_to :user
+    end
+
+    it "a :list method" do
+      expect(@like).to respond_to :list
+    end
+  end
 end
