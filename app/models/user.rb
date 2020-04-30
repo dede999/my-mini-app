@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :lists
-  has_many :tasks, through: :lists
+  has_many :lists, dependent: :delete_all
+  has_many :likes, dependent: :delete_all
+  has_many :tasks, through: :lists, dependent: :delete_all
+
+  def followed_lists
+    self.likes.collect { |like| like.list }
+  end
 end
