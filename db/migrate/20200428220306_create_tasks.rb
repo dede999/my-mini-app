@@ -4,7 +4,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string :title
       t.references :list, foreign_key: true
       t.references :parent
-      t.boolean :is_complete
+      t.boolean :is_complete, default: 0
 
       t.timestamps
     end

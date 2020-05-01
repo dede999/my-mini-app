@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_04_30_035047) do
   create_table "lists", force: :cascade do |t|
     t.string "title"
     t.integer "user_id"
-    t.string "is_private", default: "f"
+    t.boolean "is_private", default: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_04_30_035047) do
     t.string "title"
     t.integer "list_id"
     t.integer "parent_id"
-    t.boolean "is_complete"
+    t.boolean "is_complete", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["list_id"], name: "index_tasks_on_list_id"

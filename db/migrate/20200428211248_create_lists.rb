@@ -3,7 +3,7 @@ class CreateLists < ActiveRecord::Migration[5.2]
     create_table :lists do |t|
       t.string :title
       t.references :user, foreign_key: true
-      t.string :is_private, default: false
+      t.boolean :is_private, default: 0
       t.text :description
 
       t.timestamps
