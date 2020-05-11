@@ -30,7 +30,7 @@ class TaskController < ApplicationController
   end
 
   def update
-    if @task.list.user === current_user
+    if @task.list.user == current_user
       if @task.update(task_params)
         render json: @task, status: :ok
       else

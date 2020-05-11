@@ -5,6 +5,7 @@ class ListsController < ApplicationController
   # GET /lists
   def index
     @lists = List.all.where(is_private: false)
+    @lists << current_user.lists unless current_user
 
     render json: @lists
   end
@@ -58,7 +59,7 @@ class ListsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def list_params
       params.require(:list)
-          .permit(:title, :is_private,
+          .permit(:title, :is_private, :description,
                   tasks_attributes: [:title, :is_complete])
     end
 end
