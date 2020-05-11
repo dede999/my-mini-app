@@ -44,7 +44,7 @@ group :development do
 end
 
 # CORS
-gem 'rack-cors', '~> 0.2.9', require: 'rack/cors'
+gem 'rack-cors', '~> 1.0.5', require: 'rack/cors'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
