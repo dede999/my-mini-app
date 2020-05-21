@@ -9,8 +9,8 @@ class TaskController < ApplicationController
 
   def show
     render json: {
-        task: @task,
-        child: @task.child_tasks
+      task: @task,
+      child: @task.child_tasks
     }
   end
 
@@ -22,7 +22,7 @@ class TaskController < ApplicationController
       if @task.save
         render json: @task, status: :created, location: @task
       else
-        render json: @task.errors, status: :unprocessable_entity
+        render json: @task.errors.messages, status: :unprocessable_entity
       end
     else
       render status: :unauthorized
@@ -34,7 +34,7 @@ class TaskController < ApplicationController
       if @task.update(task_params)
         render json: @task, status: :ok
       else
-        render json: @task.errors, status: :unprocessable_entity
+        render json: @task.errors.messages, status: :unprocessable_entity
       end
     else
       render status: :unauthorized

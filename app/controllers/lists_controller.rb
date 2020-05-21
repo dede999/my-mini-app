@@ -5,7 +5,7 @@ class ListsController < ApplicationController
   # GET /lists
   def index
     @lists = List.all.where(is_private: false)
-    @lists << current_user.lists unless current_user
+    @lists << current_user.lists if current_user
 
     render json: @lists
   end
@@ -23,7 +23,7 @@ class ListsController < ApplicationController
     if @list.save
       render json: @list, status: :created, location: @list
     else
-      render json: @list.errors, status: :unprocessable_entity
+      render json: @list.errors.messages, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class ListsController < ApplicationController
       if @list.update(list_params)
         render json: @list
       else
-        render json: @list.errors, status: :unprocessable_entity
+        render json: @list.errors.messages, status: :unprocessable_entity
       end
     else
       render status: :unauthorized
