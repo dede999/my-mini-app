@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  put '/edit', to: 'user_actions#edit_user'
   get '/followed_lists', to: 'user_actions#show_followed_lists'
   resources :task, except: [:index, :create]
   resources :lists do
