@@ -1,12 +1,10 @@
 class ListsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_list, only: [:show, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /lists
   def index
-    @lists = List.all.where(is_private: false)
-    @lists << current_user.lists if current_user
-
+    @lists = List.all.where("is_private = 0 OR user_id = ?", current_user.id)
     render json: @lists
   end
 
