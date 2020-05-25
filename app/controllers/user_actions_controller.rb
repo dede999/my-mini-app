@@ -7,11 +7,9 @@ class UserActionsController < ApplicationController
     if @follow.empty?
       @like = Like.new(user: current_user, list: list)
       if @like.save
-        render json: {
-            msg: "User ##{current_user.id} is following list ##{list.id}"
-        }, status: :created, location: @like
+        render json: @like, status: :created
       else
-        render json: @like.errors, status: :unprocessable_entity
+        render json: @like.errors.messages, status: :unprocessable_entity
       end
     end
   end
